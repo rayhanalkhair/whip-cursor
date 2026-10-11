@@ -1,0 +1,33 @@
+# Whip Cursor
+
+A whip hangs from your mouse pointer in every Windows app. Flick the mouse to crack it.
+
+## Run
+
+Download or build `WhipCursor.exe` and double-click it. A whip icon appears in the tray (check the `^` overflow).
+
+- **Ctrl+Alt+W** turns the whip on and off.
+- Right-click the tray icon for volume, whip length, crack sensitivity, sparks, Start with Windows and Quit.
+- Cracks are muted automatically while a full-screen app (video, presentation, game) is in front.
+
+## Your own crack sounds
+
+Put one or more `.wav` files in `%AppData%\WhipCursor\sounds\` and restart the app. If none of them can be read, the built-in sounds are used. Errors are written to `%AppData%\WhipCursor\log.txt`.
+
+## Optional: whip-handle pointer
+
+Right-click `cursor/install.inf` → **Install** (Windows asks for admin permission because it copies into `C:\Windows\Cursors`). Then open **Mouse settings → Additional mouse settings → Pointers**, pick the **Whip Cursor** scheme and click OK. To undo, pick **Windows Default** there.
+
+## Known limits
+
+The whip can't be drawn over exclusive-fullscreen games, admin (elevated) windows, the lock screen or UAC prompts. Windows does not allow it.
+
+## Build
+
+Needs the .NET 8 SDK.
+
+    dotnet test
+    dotnet run --project src/WhipCursor
+    dotnet publish src/WhipCursor -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o publish
+
+Debug tip-speed logging: set `WHIPCURSOR_DEBUG=1` before starting.
