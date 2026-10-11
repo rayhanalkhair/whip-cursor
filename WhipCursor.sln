@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{50439BEC-D767-4433-8888-ECBC764B0162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhipCursor.Core", "src\WhipCursor.Core\WhipCursor.Core.csproj", "{6929979B-65BE-4039-8AF4-BCD09C826917}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{37978165-E276-4684-B960-BC82C7E3926B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhipCursor.Tests", "tests\WhipCursor.Tests\WhipCursor.Tests.csproj", "{782E52FC-FDA9-4E92-9869-D7E78B588EF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6929979B-65BE-4039-8AF4-BCD09C826917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6929979B-65BE-4039-8AF4-BCD09C826917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6929979B-65BE-4039-8AF4-BCD09C826917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6929979B-65BE-4039-8AF4-BCD09C826917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782E52FC-FDA9-4E92-9869-D7E78B588EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782E52FC-FDA9-4E92-9869-D7E78B588EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782E52FC-FDA9-4E92-9869-D7E78B588EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782E52FC-FDA9-4E92-9869-D7E78B588EF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6929979B-65BE-4039-8AF4-BCD09C826917} = {50439BEC-D767-4433-8888-ECBC764B0162}
+		{782E52FC-FDA9-4E92-9869-D7E78B588EF3} = {37978165-E276-4684-B960-BC82C7E3926B}
+	EndGlobalSection
+EndGlobal
