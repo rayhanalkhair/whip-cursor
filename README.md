@@ -2,6 +2,8 @@
 
 A whip hangs from your mouse pointer in every Windows app. Flick the mouse to crack it.
 
+![Whip Cursor demo: the whip swings from the pointer and cracks with a spark on a fast flick](docs/demo.gif)
+
 ## Run
 
 Download or build `WhipCursor.exe` and double-click it. A whip icon appears in the tray (check the `^` overflow).
