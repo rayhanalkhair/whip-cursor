@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.sln text eol=crlf
+*.inf text eol=crlf
+*.wav binary
+*.cur binary
+*.ico binary
+*.png binary
+*.gif binary

@@ -10,6 +10,14 @@ Download or build `WhipCursor.exe` and double-click it. A whip icon appears in t
 - Right-click the tray icon for volume, whip length, crack sensitivity, sparks, Start with Windows and Quit.
 - Cracks are muted automatically while a full-screen app (video, presentation, game) is in front.
 
+## Privacy
+
+Whip Cursor makes no network connections and collects nothing. It only reads the mouse pointer position (it never hooks or records keyboard or mouse input) and stores its settings and log in `%AppData%\WhipCursor\`.
+
+## Windows warnings
+
+`WhipCursor.exe` is not code-signed, so Windows SmartScreen may show "Windows protected your PC" the first time you run it: click **More info** → **Run anyway**. Some antivirus tools may also be cautious about a small app that registers a global hotkey and draws a topmost overlay window. The full source is in this repository if you want to build it yourself (see Build below).
+
 ## Your own crack sounds
 
 Put one or more `.wav` files in `%AppData%\WhipCursor\sounds\` and restart the app. If none of them can be read, the built-in sounds are used. Errors are written to `%AppData%\WhipCursor\log.txt`.
