@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using static WhipCursor.NativeMethods;
 
 namespace WhipCursor;
@@ -25,8 +26,10 @@ internal sealed class OverlayWindow : NativeWindow, IDisposable
         });
     }
 
-    public void Present(Bitmap bitmap, int left, int top, byte opacity)
+    /// <returns>0 on success, otherwise the Win32 error from UpdateLayeredWindow (the window then keeps its old content).</returns>
+    public int Present(Bitmap bitmap, int left, int top, byte opacity)
     {
+        int error = 0;
         IntPtr screenDc = GetDC(IntPtr.Zero);
         IntPtr memoryDc = CreateCompatibleDC(screenDc);
         IntPtr hBitmap = bitmap.GetHbitmap(Color.FromArgb(0));
@@ -42,7 +45,8 @@ internal sealed class OverlayWindow : NativeWindow, IDisposable
                 SourceConstantAlpha = opacity,
                 AlphaFormat = AC_SRC_ALPHA,
             };
-            UpdateLayeredWindow(Handle, screenDc, ref destination, ref size, memoryDc, ref source, 0, ref blend, ULW_ALPHA);
+            if (!UpdateLayeredWindow(Handle, screenDc, ref destination, ref size, memoryDc, ref source, 0, ref blend, ULW_ALPHA))
+                error = Marshal.GetLastWin32Error();
         }
         finally
         {
@@ -57,6 +61,7 @@ internal sealed class OverlayWindow : NativeWindow, IDisposable
             ShowWindow(Handle, SW_SHOWNOACTIVATE);
             _visible = true;
         }
+        return error;
     }
 
     public void Hide()

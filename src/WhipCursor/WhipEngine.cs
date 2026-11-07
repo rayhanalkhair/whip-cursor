@@ -64,7 +64,7 @@ internal sealed class WhipEngine : IDisposable
         var clock = Stopwatch.StartNew();
         WhipSimulator? sim = null;
         double last = 0, nextFullscreenCheck = 0, nextTopmost = 0, nextDebugLog = 0;
-        bool fullscreen = false, needsDraw = true;
+        bool fullscreen = false, needsDraw = true, firstDrawAfterCreate = false, drawFailing = false;
 
         while (!_stopRequested)
         {
@@ -92,6 +92,7 @@ internal sealed class WhipEngine : IDisposable
             {
                 sim = new WhipSimulator(mouse, length, threshold, gravity);
                 needsDraw = true;
+                firstDrawAfterCreate = true;
             }
             sim.Configure(length, threshold, gravity);
             sim.TeleportDistance = Presets.TeleportDistanceDip * scale;
@@ -124,7 +125,13 @@ internal sealed class WhipEngine : IDisposable
             if (active || needsDraw)
             {
                 using var image = renderer.Render(sim.Rope.Points, sparks.Sparks, scale);
-                overlay.Present(image.Bitmap, image.Left, image.Top, OverlayOpacity);
+                int error = overlay.Present(image.Bitmap, image.Left, image.Top, OverlayOpacity);
+                if (error != 0 && !drawFailing)
+                    _log.Error($"UpdateLayeredWindow failed (Win32 error {error}); overlay keeps its previous content. mouse=({mouse.X:F0},{mouse.Y:F0}) rect=({image.Left},{image.Top},{image.Bitmap.Width}x{image.Bitmap.Height})", null);
+                drawFailing = error != 0;
+                if (_debug && firstDrawAfterCreate)
+                    _log.Info($"DRAW first frame of new whip: mouse=({mouse.X:F0},{mouse.Y:F0}) rect=({image.Left},{image.Top},{image.Bitmap.Width}x{image.Bitmap.Height}) error={error}");
+                firstDrawAfterCreate = false;
                 needsDraw = active; // draw one more frame after going idle to show the final rest pose
             }
 
